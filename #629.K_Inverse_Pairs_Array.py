@@ -1,3 +1,6 @@
+'''
+https://leetcode.com/problems/k-inverse-pairs-array/
+'''
 class Solution:
 #    from math import perm,comb
     def kInversePairs(self, n: int, k: int) -> int:
