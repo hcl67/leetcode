@@ -1,3 +1,6 @@
+'''
+https://leetcode.com/problems/count-of-smaller-numbers-after-self/
+'''
 class Solution:
     def countSmaller(self, nums: List[int]) -> List[int]:
         import math
