@@ -1,3 +1,6 @@
+'''
+https://leetcode.com/problems/redundant-connection/
+'''
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
         #广度优先遍历
