@@ -14,3 +14,6 @@ class Solution:
                 a[0,i] = a[0,i] % (10**9+7)
         return a.sum() % (10**9+7)
 
+'''
+矩阵power可以用特征值分解进一步压缩到O(1)
+'''
