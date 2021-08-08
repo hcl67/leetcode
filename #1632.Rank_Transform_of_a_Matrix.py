@@ -28,6 +28,20 @@ class Solution:
 
         tiedsu = [[(i,j) for j in range(d2)] for i in range(d1)]
 
+        #看了答案后，更快的并查集方案    
+        for i in range(d1):
+            l = sorted([tiedsu[i][j] for j in range(d2)],key = lambda x:matrix[x[0]][x[1]])
+            for k in range(d2-1):
+                if matrix[l[k][0]][l[k][1]] == matrix[l[k+1][0]][l[k+1][1]]:
+                    undsu(l[k],l[k+1],tiedsu)
+
+        for j in range(d2):
+            l = sorted([tiedsu[i][j] for i in range(d1)],key = lambda x:matrix[x[0]][x[1]])
+            for k in range(d1-1):
+                if matrix[l[k][0]][l[k][1]] == matrix[l[k+1][0]][l[k+1][1]]:
+                    undsu(l[k],l[k+1],tiedsu)
+        
+        '''
         for i in range(d1):
             for j in range(d2):
                 for k in range(i):
@@ -38,7 +52,7 @@ class Solution:
                     if matrix[i][k] == matrix[i][j]:
                         undsu((i,k),(i,j),tiedsu)
                         break
-
+        '''
         from collections import defaultdict
 
         tiedict = defaultdict(set)
