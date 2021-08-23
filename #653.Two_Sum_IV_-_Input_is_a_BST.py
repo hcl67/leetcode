@@ -26,4 +26,36 @@ class Solution:
             else:
                 i += 1
         return False
-        
+        #方法2，利用bst的上下元素搜索方法（解答）
+        def pushLeft(st, root):
+            while root:
+                st.append(root)
+                root = root.left
+
+        def pushRight(st, root):
+            while root:
+                st.append(root)
+                root = root.right
+
+        def nextLeft(st):
+            node = st.pop()
+            pushLeft(st, node.right)
+            return node.val
+
+        def nextRight(st):
+            node = st.pop()
+            pushRight(st, node.left)
+            return node.val
+
+        stLeft, stRight = [], []
+        pushLeft(stLeft, root)
+        pushRight(stRight, root)
+
+        left, right = nextLeft(stLeft), nextRight(stRight)
+        while left < right:
+            if left + right == k: return True
+            if left + right < k:
+                left = nextLeft(stLeft)
+            else:
+                right = nextRight(stRight)
+        return False
