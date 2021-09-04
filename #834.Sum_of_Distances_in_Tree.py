@@ -1,45 +1,30 @@
 '''
 https://leetcode.com/problems/sum-of-distances-in-tree/
 '''
-        def dfs1(u,f):
-            sz[u] = 1
-            dp[u] = 0
-            for v in graph[u]:
-                if v==f:
-                    continue
-                dfs1(v,u)
-                dp[u] += (dp[v] + sz[v])
-                sz[u] += sz[v]
-        
-        def dfs2(u,f):
-            ans[u] = dp[u]
-            for v in graph[u]:
-                if v == f:
-                    continue   
-                pu = dp[u]
-                pv = dp[v]
-                su = sz[u]
-                sv = sz[v]
-                dp[u] -= (dp[v]+sz[v])
-                sz[u] -= sz[v]
-                dp[v] += (dp[u]+sz[u])
-                sz[v] += sz[u]
-                dfs2(v,u)
-                dp[u] = pu
-                dp[v] = pv
-                sz[u] = su
-                sz[v] = sv
-        ans = [0 for i in range(n)]
-        sz = [0 for i in range(n)]
-        dp = [0 for i in range(n)]
-        graph = [[]for i in range(n)]
-        for edge in edges:
-            u = edge[0]
-            v = edge[1]
-            graph[u].append(v)
-            graph[v].append(u)
-        dfs1(0,-1)
-        dfs2(0,-1)
+class Solution:
+    def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
+        graph = collections.defaultdict(set)
+        for u, v in edges:
+            graph[u].add(v)
+            graph[v].add(u)
+
+        count = [1] * n
+        ans = [0] * n
+        def dfs(node = 0, parent = None):
+            for child in graph[node]:
+                if child != parent:
+                    dfs(child, node)
+                    count[node] += count[child]
+                    ans[node] += ans[child] + count[child]
+
+        def dfs2(node = 0, parent = None):
+            for child in graph[node]:
+                if child != parent:
+                    ans[child] = ans[node] - count[child] + n - count[child]
+                    dfs2(child, node)
+
+        dfs()
+        dfs2()
         return ans
 #trial 2 还是太慢
     if len(edges)==0:
