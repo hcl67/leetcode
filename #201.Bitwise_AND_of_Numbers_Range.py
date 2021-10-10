@@ -7,11 +7,8 @@ class Solution:
         if len(bl) != len(br):
             return 0
         ans = ''
-        for i in range(len(bl)):
-            if bl[i] == br[i]:
-                ans += bl[i]
-            else:
-                break
-        ans += '0'*(len(br)-len(ans))
+        i = 0
+        while i < len(br) and bl[i] == br[i]:
+            i += 1
+        ans += br[:i] + '0'*(len(br)-i)
         return int(ans,2)
-        
