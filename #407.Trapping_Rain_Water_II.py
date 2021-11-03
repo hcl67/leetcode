@@ -4,6 +4,7 @@ https://leetcode-cn.com/problems/trapping-rain-water-ii/
 class Solution:
     def trapRainWater(self, heightMap: List[List[int]]) -> int:
 
+    # h[i][j] = max(heightMap[i][j],min(h[i-1][j],h[i][j-1],h[i+1][j],h[i][j+1]))
 
         m,n = len(heightMap),len(heightMap[0])
         h = [[heightMap[i][j] for j in range(n)] for i in range(m)]
