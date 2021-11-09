@@ -12,7 +12,8 @@ class Solution:
         p1,ps,ws = [_bs(p[0]) for p in puzzles],[_bs(p) for p in puzzles],[_bs(w) for w in words]
         return [sum(p1[i]&ws[j]>0 and (ps[i]^ws[j])&ws[j]==0 for j in range(len(words))) for i in range(len(puzzles))]
 
-        '''
+        
+        #将将可以过
         pd = defaultdict(set)
         for i in range(len(puzzles)):
             for c in puzzles[i]:
@@ -23,4 +24,22 @@ class Solution:
             for i in a0:
                 if puzzles[i][0] in w:
                     ans[i]+=1
-        return ans        
+        return ans
+        '''
+        #答案后的改造
+        def _bs(s):
+            return reduce(lambda x,y: x|y,[1<<(ord(c)-97) for c in s])
+        wf = Counter([_bs(w) for w in words])
+        ans = []
+        for p in puzzles:
+            total = 0
+            for choose in range(1 << 6):
+                mask = 0
+                for i in range(6):
+                    if choose & (1 << i):
+                        mask |= (1 << (ord(p[i + 1]) - 97))
+                mask |= (1 << (ord(p[0]) - 97))
+                if mask in wf:
+                    total += wf[mask]
+            ans += [total]
+        return ans
