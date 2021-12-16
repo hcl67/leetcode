@@ -33,16 +33,20 @@ class Solution:
         else:
             return q[len(q)//2:len(q)//2+1]
         
+        '''
+        #Solution Trim Leaf思路
+        while len(edgedict) > 2:
+            trimnode = set(k for k,v in edgedict.items() if len(v) == 1)
+            newedgedict = {k:v-trimnode for k,v in edgedict.items() if len(v)>1}
+            edgedict = newedgedict
+        return list(edgedict.keys())
+        
+        
         
         '''
+        '''
         TLE
-        if len(edges) == 0:
-            return list(range(n))
-        edgedict = defaultdict(set)
-        for e in edges:
-            edgedict[e[0]].add(e[1])
-            edgedict[e[1]].add(e[0])
-        edgedict = dict(edgedict)
+
         @cache
         def _c(f,m):
             ans = {m}
@@ -94,13 +98,7 @@ class Solution:
         
         '''
         TLE
-        if len(edges) == 0:
-            return list(range(n))
-        edgedict = defaultdict(set)
-        for e in edges:
-            edgedict[e[0]].add(e[1])
-            edgedict[e[1]].add(e[0])
-        edgedict = dict(edgedict)
+
         ans = []
         flag = 1
         tree = {}
