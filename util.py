@@ -44,3 +44,25 @@ def undsu(p1,p2,dsu,size):
         size[p2] += size[p1]
         size[p1] = 0
     return
+
+#有向图查环
+#edge = [a,b]  a->b
+        inddict = defaultdict(int)
+        outdict = defaultdict(set)
+        for edge in edges:
+            inddict[edge[1]] += 1
+            outdict[edge[0]].add(edge[1])
+        que = deque(list(set(range(numNodes)) - set(inddict.keys())))
+        don = []
+        while que:
+            nod = que.popleft()
+            don.append(nod)
+            for j in outdict[nod]:
+                inddict[j] -= 1
+                if inddict[j] == 0:
+                    que.append(j)
+        if len(don) == numCNodes:
+            return False
+        else:
+            return True
+            
