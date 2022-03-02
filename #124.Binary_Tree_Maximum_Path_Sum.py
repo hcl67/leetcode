@@ -10,7 +10,6 @@ https://leetcode.com/problems/binary-tree-maximum-path-sum/
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
         self.r = -inf
-        @cache
         def _c(self, node):
             if node == None:
                 return -inf
