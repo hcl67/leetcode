@@ -15,11 +15,13 @@ class Solution:
             if node == None:
                 return -inf
             else:
-                t = max(_c(self,node.left) + node.val
-                       ,_c(self,node.right) + node.val
+                rl = _c(self,node.left)
+                rr = _c(self,node.right)
+                t = max(rl + node.val
+                       ,rr + node.val
                        ,node.val)
                 self.r = max(self.r
-                             , _c(self,node.left) + _c(self,node.right) + node.val
+                             , rl + rr + node.val
                              , t)
                 return t
         _c(self,root)
